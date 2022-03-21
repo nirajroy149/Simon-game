@@ -5,11 +5,17 @@ var gamePattern = [];
 var userPattern = [];
 var level = 0;
 
-$(document).on("keydown", function () {
+function play(){
     $(".heading").text("Level " + level);
+
     nextsequence();
+
     started = "true";
-});
+
+    $(".play").addClass("start");
+    $(".play").removeAttr("onclick");
+}
+
 
 function nextsequence() {
     userPattern = [];
@@ -51,7 +57,7 @@ function checkCurrentColor(currentlevel) {
         setTimeout(function(){
             $("body").removeClass("game-over");
         }, 200);
-        $(".heading").text("Game Over, Press any key to Restart");
+        $(".heading").text("Game Over, Press Play to Restart");
         startover();
     }
 
@@ -61,6 +67,10 @@ function startover(){
     level = 0;
     started = "false";
     gamePattern = [];
+
+    $(".play").removeClass("start");
+    $(".play").attr("onclick", "play()")
+
 }
 
 function animatePress(name) {
